@@ -1,0 +1,53 @@
+# deepseek 官方 API 配置
+deepseek-chat:
+  enabled: true
+  api_key: 'deepseek_api_key'
+  base_url: 'https://api.deepseek.com'
+
+# 阿里云 API 配置
+aliyun_base: &aliyun_base 
+  api_key: 'qwen_api_key'
+  base_url: 'https://dashscope.aliyuncs.com/compatible-mode/v1'
+
+# gemini官方 API 配置
+gemini_base: &gemini_base
+  api_key: 'gemini_api_key'
+  base_url: 'https://gemini.xwysyy.asia/v1'
+
+# 益丰接口平台 API 配置
+ephone_base: &ephone_base
+  api_key: 'ephone_api_key'
+  base_url: 'https://api.ephone.ai/v1/'
+
+# AGICTO 大模型调用基座 API
+agicto_base: &agicto_base
+  api_key: 'agicto_api_key'
+  base_url: 'https://api.agicto.cn/v1'
+
+qwen-max:
+  enabled: true
+  <<: *aliyun_base
+
+qwen-plus:
+  enabled: true
+  <<: *aliyun_base
+
+qwen-coder-plus:
+  enabled: true
+  <<: *aliyun_base
+
+gpt-4o:
+  enabled: false
+  <<: *agicto_base
+
+gpt-4o-mini:
+  enabled: true
+  <<: *agicto_base
+
+claude-3-5-sonnet-20241022:
+  enabled: true
+  <<: *ephone_base
+
+gemini-1.5-pro:
+  enabled: true
+  <<: *gemini_base
