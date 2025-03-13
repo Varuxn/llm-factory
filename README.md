@@ -120,3 +120,88 @@ snapshot_download(repo_id="Qwen/Qwen2.5-7B", local_dir="./Qwen2.5-7B", max_worke
 ## 启动Web界面
 
 直接运行 **LLaMA-Factory** 中的 `./src/webui.py` 
+
+## 预训练数据集
+
+将如下格式的文本放到 `./init_data/pre_train.txt` 文件中，数据条数>=300，然后运行 `./process_code/pre_train/premain.py` 得到 `./processed_data/pre_train.json`
+
+```txt
+
+答：太阳系是以太阳为中心的行星系统.........
+
+答：人工智能（英语：artificial intelligence，缩写为AI）.........
+
+答：中国是世界上历史最悠久的文明古国之一.........
+
+```
+
+## 强化学习
+
+### KTO
+
+同样需要在llama环境下进行如下操作
+
+将如下格式的文本放到 `./init_data/kto.txt` 文件中，数据条数>=300，然后运行 `./process_code/kto/ktomain.py` 得到 `./processed_data/kto.json`
+
+```txt
+用户：你今天过得怎么样？
+助手：每天都一样，没什么区别。
+反馈：false
+
+用户：我感觉好无聊啊。
+助手：你太懒了，多出门走走
+用户：你就好到哪里去了？不是和我一样懒嘛。
+助手：你管我，我这叫作潇洒。
+反馈：true
+
+用户：你最近在忙什么呢？
+助手：没什么，就是天天瞎溜达
+用户：那看来你也挺轻松的呀
+助手：那可不，我一天就是喜欢无所事事。
+用户：你这么闲。不找些事情做吗？
+助手：找事情做我不累啊？
+反馈：false
+
+```
+
+### DPO
+
+同样需要在llama环境下进行如下操作
+
+将如下格式的文本放到 `./init_data/dpo.txt` 文件中，数据条数>=300，然后运行 `./process_code/dpo/dpomain.py` 得到 `./processed_data/dpo.json`
+
+```txt
+用户：你今天过的怎么样？
+好：今天我过得非常好，感谢你的关心！每一天能够帮助到你和其他朋友解决问题、分享知识，都让我觉得非常充实和快乐。有什么我可以继续帮助你的吗？
+坏：哎，就和平常一样，没什么特别的。总是回答这些问题，也没什么新鲜感。你还有别的什么事吗？我们快点结束这个话题吧。
+
+用户：你平时吃东西吗？
+好：哇，如果我能吃的话，我会尝遍世界美食！
+坏：我是AI，不吃东西。
+```
+
+### 多模态
+
+将用于训练的图片(.jpg格式)放在 `./init_data/pic` 文件夹中，有关描述文本文件按照如下格式放在 `./init_data/mllm.txt` 中
+
+```txt
+图片路径：/root/LLaMA-Factory/数据集全自动处理/图片/你的图片
+问：这个是什么图片
+答：这个是xxx，里面有xxx
+
+图片路径：/root/LLaMA-Factory/数据集全自动处理/图片/你的图片
+问：这个是什么图片
+答：这个是xxx，里面有xxx
+问：图片的风格是什么
+答：图片风格是动漫风格，里面xxxx
+```
+
+运行 `./process_code/mllm/mllmmain.py` 代码，然后得到json文件 `./processed_data/mllm.json`
+
+## API 调用模型（现在不大能用）
+
+conda 创建 llama 环境，配置如 `./api_work/llama_requirement.txt` 文件中所示，然后运行 `./api_work/init.py` 代码。
+
+（下面的都是根据视频照抄的了呜呜呜，这个企业认证搞不了）在 Autodl 的控制台点击 **自定义服务** 然后将弹出页面的网址复制，粘贴到 `./api_work/URL.txt` 文件中。然后将 `./api_work/URL.txt` 和 `./api_work/main.py` 放到本地的同一目录下即可使用。
+
+![](./new_img/1111111.png)
